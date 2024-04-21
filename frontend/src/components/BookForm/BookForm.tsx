@@ -21,6 +21,9 @@ const BookForm: FC = () => {
       }
       dispatch(setAddBook(book))
     }
+
+    setTitle('')
+    setAuthor('')
   }
 
   return (

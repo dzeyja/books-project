@@ -18,9 +18,15 @@ const bookSlice = createSlice({
     setAddBook: (state, action: PayloadAction<IBooks>) => {
       state.books.push(action.payload)
     },
+    setDeleteBook: (state, action: PayloadAction<string>) => {
+      return {
+        ...state,
+        books: state.books.filter((book) => book.id !== action.payload),
+      }
+    },
   },
 })
 
 export default bookSlice.reducer
 
-export const { setAddBook } = bookSlice.actions
+export const { setAddBook, setDeleteBook } = bookSlice.actions
