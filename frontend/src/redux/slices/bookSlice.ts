@@ -24,9 +24,17 @@ const bookSlice = createSlice({
         books: state.books.filter((book) => book.id !== action.payload),
       }
     },
+    setToogleFavorite: (state, action: PayloadAction<string>) => {
+      return state.books.forEach((book) => {
+        if (book.id === action.payload) {
+          book.isFavorite = !book.isFavorite
+        }
+      })
+    },
   },
 })
 
 export default bookSlice.reducer
 
-export const { setAddBook, setDeleteBook } = bookSlice.actions
+export const { setAddBook, setDeleteBook, setToogleFavorite } =
+  bookSlice.actions

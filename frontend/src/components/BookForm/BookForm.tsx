@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FC, FormEvent, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { IBooks } from '../../redux/modules/redux'
-import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import { useAppDispatch } from '../../hooks/redux'
 import { setAddBook } from '../../redux/slices/bookSlice'
 import './BookForm.css'
 import bookData from '../../data/books.json'
@@ -19,6 +19,7 @@ const BookForm: FC = () => {
         title,
         author,
         id: uuidv4(),
+        isFavorite: false,
       }
       dispatch(setAddBook(book))
     }
@@ -34,6 +35,7 @@ const BookForm: FC = () => {
     const book = {
       ...randomBook,
       id: uuidv4(),
+      isFavorite: false,
     }
     console.log(book)
     dispatch(setAddBook(book))

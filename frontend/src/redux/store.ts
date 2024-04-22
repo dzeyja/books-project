@@ -1,8 +1,10 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import bookReducer from './slices/bookSlice'
+import filterReducer from './slices/filterSlice'
 
 const rootState = combineReducers({
   books: bookReducer,
+  filter: filterReducer,
 })
 
 export const setupStore = () => {

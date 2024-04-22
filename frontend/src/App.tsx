@@ -2,6 +2,7 @@ import React from 'react'
 import './App.css'
 import BookList from './components/BookList/BookList'
 import BookForm from './components/BookForm/BookForm'
+import Filter from './components/Filters/Filter'
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
           <BookForm />
         </div>
         <div className="app-right-column">
+          <Filter />
           <BookList />
         </div>
       </main>
