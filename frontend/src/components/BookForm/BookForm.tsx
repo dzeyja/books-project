@@ -1,9 +1,10 @@
 import React, { ChangeEvent, FC, FormEvent, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-import './BookForm.css'
 import { IBooks } from '../../redux/modules/redux'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { setAddBook } from '../../redux/slices/bookSlice'
+import './BookForm.css'
+import bookData from '../../data/books.json'
 
 const BookForm: FC = () => {
   const [title, setTitle] = useState<string>()
@@ -24,6 +25,18 @@ const BookForm: FC = () => {
 
     setTitle('')
     setAuthor('')
+  }
+
+  const handleRandomBook = () => {
+    const randomIndex = Math.floor(Math.random() * bookData.length)
+    const randomBook = bookData[randomIndex]
+
+    const book = {
+      ...randomBook,
+      id: uuidv4(),
+    }
+    console.log(book)
+    dispatch(setAddBook(book))
   }
 
   return (
@@ -53,6 +66,9 @@ const BookForm: FC = () => {
           />
         </div>
         <button type="submit">Add Book</button>
+        <button type="button" onClick={handleRandomBook}>
+          Add Random Book
+        </button>
       </form>
     </div>
   )
