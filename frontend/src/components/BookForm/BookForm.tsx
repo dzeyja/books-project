@@ -1,14 +1,17 @@
 import React, { ChangeEvent, FC, FormEvent, useState } from 'react'
+import { FaSpinner } from 'react-icons/fa'
 import { v4 as uuidv4 } from 'uuid'
 import { IBooks } from '../../redux/modules/redux'
-import { useAppDispatch } from '../../hooks/redux'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { setAddBook } from '../../redux/slices/bookSlice'
-import './BookForm.css'
+import { fecthBooks } from '../../redux/slices/actionCreator'
 import bookData from '../../data/books.json'
+import './BookForm.css'
 
 const BookForm: FC = () => {
   const [title, setTitle] = useState<string>()
   const [author, setAuthor] = useState<string>()
+  const isLoading = useAppSelector((state) => state.books.isLoading)
   const dispatch = useAppDispatch()
 
   const handleSubmitForm = (e: FormEvent<HTMLFormElement>) => {
@@ -41,6 +44,10 @@ const BookForm: FC = () => {
     dispatch(setAddBook(book))
   }
 
+  const handleRandomBookViaApi = () => {
+    dispatch(fecthBooks('http://localhost:4000/random-book-delayed'))
+  }
+
   return (
     <div className="app-block book-form">
       <h2>Book Form</h2>
@@ -70,6 +77,16 @@ const BookForm: FC = () => {
         <button type="submit">Add Book</button>
         <button type="button" onClick={handleRandomBook}>
           Add Random Book
+        </button>
+        <button type="button" onClick={handleRandomBookViaApi}>
+          {isLoading ? (
+            <>
+              <span>Loading Book...</span>
+              <FaSpinner className="spinner" />
+            </>
+          ) : (
+            <span>Add Random Book Via Api</span>
+          )}
         </button>
       </form>
     </div>

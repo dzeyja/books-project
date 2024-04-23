@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { BsBookmarkStarFill, BsBookmarkStar } from 'react-icons/bs'
 import { IBooks } from '../../redux/modules/redux'
-import { useAppSelector } from '../../hooks/redux'
 
 interface BookProps {
   book: IBooks

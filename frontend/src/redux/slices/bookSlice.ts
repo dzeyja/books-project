@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { IBooks } from '../modules/redux'
+import { fecthBooks } from './actionCreator'
 
 interface IState {
   books: IBooks[]
@@ -31,6 +32,15 @@ const bookSlice = createSlice({
         }
       })
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fecthBooks.pending, (state) => {
+      state.isLoading = true
+    })
+    builder.addCase(fecthBooks.fulfilled, (state, action: any) => {
+      state.isLoading = false
+      state.books.push(action.payload)
+    })
   },
 })
 
